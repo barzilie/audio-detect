@@ -43,4 +43,4 @@ if __name__ == "__main__":
     minMinute = (minIndex * 105) // 60
     minSec = (minIndex * 105) % 60
     print("in time: " + str(minMinute) + ":"
-          + str(minSec) + " a plane departed with certainty " + str(minVal * 100) + "%")
+          + str(minSec) + " a sample was found with certainty " + str(minVal * 100) + "%")
