@@ -6,16 +6,16 @@ import numpy
 import os
 
 # seconds to sample audio file for
-sample_time = 500
+sample_time = 100
 # number of points to scan cross correlation over
-span = 150
+span = 100
 # step size (in points) of cross correlation
 step = 1
 # minimum number of points that must overlap in cross correlation
 # exception is raised if this cannot be met
-min_overlap = 20
+min_overlap = 10
 # report match when cross correlation has a peak exceeding threshold
-threshold = 0.5
+threshold = 0.1
 
 # calculate fingerprint
 # Generate file.mp3.fpcalc by "fpcalc -raw -length 500 file.mp3"
@@ -100,12 +100,12 @@ def get_max_corr(corr, source, target):
     if corr[max_corr_index] > threshold:
         print("File A: %s" % (source))
         print("File B: %s" % (target))
-        print('Match with correlation of %.2f%% at offset %i'
-             % (corr[max_corr_index] * 100.0, max_corr_offset))
+        return corr[max_corr_index]
 
 def correlate(source, target):
     fingerprint_source = calculate_fingerprints(source)
     fingerprint_target = calculate_fingerprints(target)
-
     corr = compare(fingerprint_source, fingerprint_target, span, step)
     max_corr_offset = get_max_corr(corr, source, target)
+    print(max_corr_offset)
+    return max_corr_offset
